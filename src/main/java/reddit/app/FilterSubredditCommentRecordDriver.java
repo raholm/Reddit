@@ -16,10 +16,10 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.codehaus.jettison.json.JSONException;
 
-public class ExtractSubredditCommentRecordDriver
+public class FilterSubredditCommentRecordDriver
   extends Configured implements Tool {
 
-  public static class ExtractSubredditCommentRecordMapper
+  public static class FilterSubredditCommentRecordMapper
     extends Mapper<Object, Text, NullWritable, Text> {
 
     private RedditCommentRecordParser parser = new RedditCommentRecordParser();
@@ -30,9 +30,10 @@ public class ExtractSubredditCommentRecordDriver
         if (parser.parse(value)) {
           RedditCommentRecord record = parser.getRecord();
           Configuration conf = context.getConfiguration();
-          String subreddit = conf.get("subreddit");
+          String subreddit = conf.get("subreddit", "").toLowerCase();
 
-          if (record.getSubreddit().toLowerCase().equals(subreddit)) {
+          if (!subreddit.equals("") &&
+              record.getSubreddit().toLowerCase().equals(subreddit)) {
             context.write(NullWritable.get(), value);
           }
         }
@@ -42,7 +43,7 @@ public class ExtractSubredditCommentRecordDriver
     }
   }
 
-  public static class ExtractSubredditCommentRecordReducer
+  public static class FilterSubredditCommentRecordReducer
     extends Reducer<NullWritable, Text, NullWritable, Text> {
 
     @Override
@@ -66,12 +67,12 @@ public class ExtractSubredditCommentRecordDriver
     Configuration conf = getConf();
     conf.addResource("conf/reddit.xml");
 
-    Job job = Job.getInstance(conf, "Extract Subreddit Comments");
-    job.setJarByClass(ExtractSubredditCommentRecordDriver.class);
+    Job job = Job.getInstance(conf, "Filter Subreddit Comments");
+    job.setJarByClass(FilterSubredditCommentRecordDriver.class);
 
-    job.setMapperClass(ExtractSubredditCommentRecordMapper.class);
-    job.setCombinerClass(ExtractSubredditCommentRecordReducer.class);
-    job.setReducerClass(ExtractSubredditCommentRecordReducer.class);
+    job.setMapperClass(FilterSubredditCommentRecordMapper.class);
+    job.setCombinerClass(FilterSubredditCommentRecordReducer.class);
+    job.setReducerClass(FilterSubredditCommentRecordReducer.class);
 
     job.setOutputKeyClass(NullWritable.class);
     job.setOutputValueClass(Text.class);
@@ -83,7 +84,7 @@ public class ExtractSubredditCommentRecordDriver
   }
 
   public static void main(String[] args) throws Exception {
-    int exitCode = ToolRunner.run(new ExtractSubredditCommentRecordDriver(), args);
+    int exitCode = ToolRunner.run(new FilterSubredditCommentRecordDriver(), args);
     System.exit(exitCode);
   }
 }

@@ -1,5 +1,8 @@
 package reddit.app;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 public class RedditCommentRecord {
   private String recordId;
   private String threadId;
@@ -49,6 +52,22 @@ public class RedditCommentRecord {
       downs != INVALID_INTEGER_VALUE &&
       ups != INVALID_INTEGER_VALUE &&
       score != INVALID_INTEGER_VALUE;
+  }
+
+  public JSONObject toJSON() throws JSONException {
+    JSONObject obj = new JSONObject()
+      .put("recordId", recordId)
+      .put("threadId", threadId)
+      .put("parentId", parentId)
+      .put("subredditId", subredditId)
+      .put("subreddit", subreddit)
+      .put("body", body)
+      .put("author", author)
+      .put("creationTime", creationTime)
+      .put("downs", downs)
+      .put("ups", ups)
+      .put("score", score);
+    return obj;
   }
 
   /**
