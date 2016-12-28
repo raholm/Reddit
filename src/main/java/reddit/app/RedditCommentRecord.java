@@ -19,8 +19,8 @@ public class RedditCommentRecord {
   private Integer score;
   private Integer gild;
 
-  static private String INVALID_STRING_VALUE = "";
-  static private Integer INVALID_INTEGER_VALUE = Integer.MIN_VALUE;
+  static public String INVALID_STRING_VALUE = "";
+  static public Integer INVALID_INTEGER_VALUE = Integer.MIN_VALUE;
 
   public RedditCommentRecord() {
     clear();
@@ -38,6 +38,7 @@ public class RedditCommentRecord {
     downs = INVALID_INTEGER_VALUE;
     ups = INVALID_INTEGER_VALUE;
     score = INVALID_INTEGER_VALUE;
+    gild = INVALID_INTEGER_VALUE;
   }
 
   public boolean isFilled() {
@@ -51,7 +52,8 @@ public class RedditCommentRecord {
       creationTime != INVALID_INTEGER_VALUE &&
       downs != INVALID_INTEGER_VALUE &&
       ups != INVALID_INTEGER_VALUE &&
-      score != INVALID_INTEGER_VALUE;
+      score != INVALID_INTEGER_VALUE &&
+      gild != INVALID_INTEGER_VALUE;
   }
 
   public JSONObject toJSON() throws JSONException {
@@ -66,7 +68,8 @@ public class RedditCommentRecord {
       .put("creationTime", creationTime)
       .put("downs", downs)
       .put("ups", ups)
-      .put("score", score);
+      .put("score", score)
+      .put("gild", gild);
     return obj;
   }
 
