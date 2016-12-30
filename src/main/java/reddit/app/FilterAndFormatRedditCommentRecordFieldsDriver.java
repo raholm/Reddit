@@ -9,7 +9,6 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -18,37 +17,6 @@ import org.codehaus.jettison.json.JSONException;
 
 public class FilterAndFormatRedditCommentRecordFieldsDriver
   extends Configured implements Tool {
-
-  public static class FilterAndFormatRedditCommentRecordFieldsMapper
-    extends Mapper<Object, Text, NullWritable, Text> {
-
-    private RedditCommentRecordParser parser = new RedditCommentRecordParser();
-
-	@Override
-	protected void map(Object key, Text value, Context context)
-      throws IOException, InterruptedException {
-      try {
-        if (parser.parse(value)) {
-          RedditCommentRecord record = parser.getRecord();
-          context.write(NullWritable.get(), new Text(record.toJSON().toString()));
-        }
-      } catch (JSONException e) {
-        // Do nothing
-      }
-    }
-  }
-
-  public static class FilterAndFormatRedditCommentRecordFieldsReducer
-    extends Reducer<NullWritable, Text, NullWritable, Text> {
-
-    @Override
-    protected void reduce(NullWritable key, Iterable<Text> values, Context context)
-      throws IOException, InterruptedException {
-      for (Text value : values) {
-        context.write(NullWritable.get(), value);
-      }
-    }
-  }
 
   @Override
   public int run(String[] args) throws Exception {
@@ -66,8 +34,9 @@ public class FilterAndFormatRedditCommentRecordFieldsDriver
     job.setJarByClass(FilterAndFormatRedditCommentRecordFieldsDriver.class);
 
     job.setMapperClass(FilterAndFormatRedditCommentRecordFieldsMapper.class);
-    job.setCombinerClass(FilterAndFormatRedditCommentRecordFieldsReducer.class);
-    job.setReducerClass(FilterAndFormatRedditCommentRecordFieldsReducer.class);
+
+    // No need to do reduction
+    job.setNumReduceTasks(0);
 
     job.setOutputKeyClass(NullWritable.class);
     job.setOutputValueClass(Text.class);

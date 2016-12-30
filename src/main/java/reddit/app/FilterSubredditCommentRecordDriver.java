@@ -9,7 +9,6 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -43,18 +42,6 @@ public class FilterSubredditCommentRecordDriver
     }
   }
 
-  public static class FilterSubredditCommentRecordReducer
-    extends Reducer<NullWritable, Text, NullWritable, Text> {
-
-    @Override
-    protected void reduce(NullWritable key, Iterable<Text> values, Context context)
-      throws IOException, InterruptedException {
-      for (Text value : values) {
-        context.write(NullWritable.get(), value);
-      }
-    }
-  }
-
   @Override
   public int run(String[] args) throws Exception {
     if (args.length != 2) {
@@ -71,8 +58,9 @@ public class FilterSubredditCommentRecordDriver
     job.setJarByClass(FilterSubredditCommentRecordDriver.class);
 
     job.setMapperClass(FilterSubredditCommentRecordMapper.class);
-    job.setCombinerClass(FilterSubredditCommentRecordReducer.class);
-    job.setReducerClass(FilterSubredditCommentRecordReducer.class);
+
+    // No need to do reduction
+    job.setNumReduceTasks(0);
 
     job.setOutputKeyClass(NullWritable.class);
     job.setOutputValueClass(Text.class);
