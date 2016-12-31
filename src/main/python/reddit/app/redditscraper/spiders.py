@@ -1,16 +1,18 @@
 import scrapy
 
-from redditscraper.spiders.reddit_spider import RedditSpider
 from redditscraper.items import RedditThreadScraperItem
 from redditscraper.parsers import RedditHTMLThreadRecordParser
 
+class RedditSpider(scrapy.Spider):
+    name = "reddit"
+    allowed_domains = ["reddit.com"]
 
 class RedditThreadSpider(RedditSpider):
     custom_settings = {
-            'ITEM_PIPELINES': {
-                'redditscraper.pipelines.RedditThreadValidateItemPipeline': 100,
-                'redditscraper.pipelines.RedditThreadPrintItemPipeline': 300,
-            }
+        'ITEM_PIPELINES': {
+            'redditscraper.pipelines.RedditThreadValidateItemPipeline': 100,
+            'redditscraper.pipelines.RedditThreadPrintItemPipeline': 300,
+        }
     }
 
     def __init__(self, subreddit_thread_ids):

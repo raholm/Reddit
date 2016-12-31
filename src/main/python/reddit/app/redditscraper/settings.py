@@ -11,8 +11,8 @@
 
 BOT_NAME = 'redditscraper'
 
-SPIDER_MODULES = ['redditscraper.spiders']
-NEWSPIDER_MODULE = 'redditscraper.spiders'
+SPIDER_MODULES = ['spiders']
+NEWSPIDER_MODULE = 'spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
