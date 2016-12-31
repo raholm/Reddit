@@ -1,8 +1,18 @@
 class RedditHTMLRecordValidator(object):
+    """
+    Base class for validating Reddit HTML Records.
+    """
+
     def validate(self, record):
         raise NotImplemented
 
 class RedditHTMLThreadRecordValidator(object):
+    """
+    Validator for Reddit HTML Thread Records.
+    Validatation is done by the 'validate(record)' method
+    and it returns True if valid, False otherwise.
+    """
+
     def validate(self, record):
         return self.__validate_id(record) and \
             self.__validate_author_id(record) and \
