@@ -13,7 +13,9 @@ public class RedditCommentRecord {
   private String body;
   private String author;
 
-  private Integer creationTime;
+  private Integer createdDate;
+  private Integer retrievedDate;
+
   private Integer downs;
   private Integer ups;
   private Integer score;
@@ -34,7 +36,8 @@ public class RedditCommentRecord {
     subreddit = INVALID_STRING_VALUE;
     body = INVALID_STRING_VALUE;
     author = INVALID_STRING_VALUE;
-    creationTime = INVALID_INTEGER_VALUE;
+    createdDate = INVALID_INTEGER_VALUE;
+    retrievedDate = INVALID_INTEGER_VALUE;
     downs = INVALID_INTEGER_VALUE;
     ups = INVALID_INTEGER_VALUE;
     score = INVALID_INTEGER_VALUE;
@@ -49,7 +52,8 @@ public class RedditCommentRecord {
       !subreddit.equals(INVALID_STRING_VALUE) &&
       !body.equals(INVALID_STRING_VALUE) &&
       !author.equals(INVALID_STRING_VALUE) &&
-      creationTime != INVALID_INTEGER_VALUE &&
+      createdDate != INVALID_INTEGER_VALUE &&
+      retrievedDate != INVALID_INTEGER_VALUE &&
       downs != INVALID_INTEGER_VALUE &&
       ups != INVALID_INTEGER_VALUE &&
       score != INVALID_INTEGER_VALUE &&
@@ -65,7 +69,8 @@ public class RedditCommentRecord {
       .put("subreddit", subreddit)
       .put("body", body)
       .put("author", author)
-      .put("creationTime", creationTime)
+      .put("createdDate", createdDate)
+      .put("retrievedDate", retrievedDate)
       .put("downs", downs)
       .put("ups", ups)
       .put("score", score)
@@ -174,15 +179,29 @@ public class RedditCommentRecord {
   /**
    * @return the creationTime
    */
-  public Integer getCreationTime() {
-    return creationTime;
+  public Integer getCreatedDate() {
+    return createdDate;
   }
 
   /**
    * @param creationTime the creationTime to set
    */
-  public void setCreationTime(Integer creationTime) {
-    this.creationTime = creationTime;
+  public void setCreatedDate(Integer creationTime) {
+    this.createdDate = creationTime;
+  }
+
+  /**
+   * @return the receivedDate
+   */
+  public Integer getRetrievedDate() {
+    return retrievedDate;
+  }
+
+  /**
+   * @param receivedDate the receivedDate to set
+   */
+  public void setRetrievedDate(Integer receivedDate) {
+    this.retrievedDate = receivedDate;
   }
 
   /**

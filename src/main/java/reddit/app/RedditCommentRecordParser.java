@@ -20,7 +20,8 @@ public class RedditCommentRecordParser {
       redditCommentRecord.setSubreddit(parseSubreddit(obj));
       redditCommentRecord.setBody(parseBody(obj));
       redditCommentRecord.setAuthor(parseAuthor(obj));
-      redditCommentRecord.setCreationTime(parseCreationTime(obj));
+      redditCommentRecord.setCreatedDate(parseCreatedDate(obj));
+      redditCommentRecord.setRetrievedDate(parseRetrievedDate(obj));
       redditCommentRecord.setDowns(parseDowns(obj));
       redditCommentRecord.setUps(parseUps(obj));
       redditCommentRecord.setScore(parseScore(obj));
@@ -68,8 +69,12 @@ public class RedditCommentRecordParser {
     return parseStringAlternative2(obj, "author", "author");
   }
 
-  private Integer parseCreationTime(JSONObject obj) throws JSONException {
-    return Integer.parseInt(parseStringAlternative2(obj, "created_utc", "creationTime"));
+  private Integer parseCreatedDate(JSONObject obj) throws JSONException {
+    return Integer.parseInt(parseStringAlternative2(obj, "created_utc", "createdDate"));
+  }
+
+  private Integer parseRetrievedDate(JSONObject obj) throws JSONException {
+    return parseIntegerAlternative2(obj, "retrieved_on", "retrievedDate");
   }
 
   private Integer parseDowns(JSONObject obj) throws JSONException {

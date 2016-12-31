@@ -1,1 +1,1 @@
-{"parent_id":"testParentId","created_utc":"1","subreddit":"testSubreddit","score":4,"body":"testBody","ups":3,"id":"testRecordId","downs":2,"subreddit_id":"testSubredditId","link_id":"testThreadId","gilded":5,"author":"testAuthor"}
+{"parent_id":"testParentId","created_utc":"0","subreddit":"testSubreddit","score":4,"body":"testBody","ups":3,"id":"testRecordId","downs":2,"subreddit_id":"testSubredditId","link_id":"testThreadId","gilded":5,"author":"testAuthor", "retrieved_on":1}

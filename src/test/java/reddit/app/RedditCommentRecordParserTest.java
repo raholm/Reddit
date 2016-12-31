@@ -55,7 +55,8 @@ public class RedditCommentRecordParserTest
       assertTrue(record.getSubreddit().equals("testSubreddit"));
       assertTrue(record.getBody().equals("testBody"));
       assertTrue(record.getAuthor().equals("testAuthor"));
-      assertTrue(record.getCreationTime() == 1);
+      assertTrue(record.getCreatedDate() == 0);
+      assertTrue(record.getRetrievedDate() == 1);
       assertTrue(record.getDowns() == 2);
       assertTrue(record.getUps() == 3);
       assertTrue(record.getScore() == 4);
