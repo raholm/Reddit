@@ -1,7 +1,14 @@
 class RedditHTMLRecord(object):
+    """
+    Base class for Reddit HTML records.
+    """
     pass
 
 class RedditHTMLThreadRecord(RedditHTMLRecord):
+    """
+    Stores information parsed from HTML fetched from a Reddit thread.
+    """
+
     def __init__(self):
         self.id = None
         self.author_id = None

@@ -1,10 +1,20 @@
 from redditscraper.records import RedditHTMLThreadRecord
 
 class RedditHTMLRecordParser(object):
+    """
+    Base HTML parser class for Reddit website.
+    """
+
     def parse(self, response):
         raise NotImplemented
 
 class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
+    """
+    Parsing Reddit thread information given a response object
+    using the 'parse' method.
+    The resulting data is stored in 'record' as a RedditHTMLThreadRecord.
+    """
+
     def __init__(self):
         self.record = RedditHTMLThreadRecord()
 

@@ -8,6 +8,10 @@
 import scrapy
 
 class RedditThreadScraperItem(scrapy.Item):
+    """
+    Stores information fetched from a Reddit thread.
+    """
+
     id = scrapy.Field()
     author_id = scrapy.Field()
     author = scrapy.Field()

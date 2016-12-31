@@ -4,10 +4,20 @@ from redditscraper.items import RedditThreadScraperItem
 from redditscraper.parsers import RedditHTMLThreadRecordParser
 
 class RedditSpider(scrapy.Spider):
+    """
+    Base class for Reddit spiders.
+    """
+
     name = "reddit"
     allowed_domains = ["reddit.com"]
 
 class RedditThreadSpider(RedditSpider):
+    """
+    Spider for fetching information from Reddit threads
+    given a dictionary where keys are subreddit names and values
+    are lists of thread ids within corresponding subreddits.
+    """
+
     custom_settings = {
         'ITEM_PIPELINES': {
             'redditscraper.pipelines.RedditThreadValidateItemPipeline': 100,

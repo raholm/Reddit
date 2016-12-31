@@ -13,7 +13,7 @@ class RedditSpiderRunner(object):
 
 class RedditThreadSpiderRunner(object):
     """
-    Used for fetching thread information by calling the .run() method.
+    Used for fetching thread information by calling the 'run' method.
 
     Parameters
     -----------
