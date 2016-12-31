@@ -10,7 +10,7 @@ public class RedditConfiguration {
   private static String sslCertificatePath = "";
   private static Boolean loaded = false;
 
-  public static void loadProperties() throws IOException {
+  private static void loadProperties() throws IOException {
     if (!loaded) {
       Properties properties = new Properties();
       String propertiesFileName = "conf/reddit.properties";
@@ -42,14 +42,16 @@ public class RedditConfiguration {
   /**
    * @return the subreddit
    */
-  public static String getSubreddit() {
+  public static String getSubreddit() throws IOException {
+    loadProperties();
     return subreddit;
   }
 
   /**
    * @return the sslCertificatePath
    */
-  public static String getSSLCertificatePath() {
+  public static String getSSLCertificatePath() throws IOException {
+    loadProperties();
     return sslCertificatePath;
   }
 }
