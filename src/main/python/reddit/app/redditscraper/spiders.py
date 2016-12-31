@@ -2,6 +2,7 @@ import scrapy
 
 from redditscraper.items import RedditThreadScraperItem
 from redditscraper.parsers import RedditHTMLThreadRecordParser
+from redditscraper.common import get_utc_timestamp
 
 class RedditSpider(scrapy.Spider):
     """
@@ -55,6 +56,7 @@ class RedditThreadSpider(RedditSpider):
         item["body"] = record.body
         item["domain"] = record.domain
         item["url"] = record.url
-        item["creation_date"] = record.creation_date
+        item["created_date"] = record.created_date
+        item["received_date"] = get_utc_timestamp()
 
         return item

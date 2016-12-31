@@ -30,7 +30,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         self.record.body = self.__parse_body(response)
         self.record.domain = self.__parse_domain(response)
         self.record.url = self.__parse_url(response)
-        self.record.creation_date = self.__parse_creation_date(response)
+        self.record.created_date = self.__parse_created_date(response)
 
     def __parse_id(self, response):
         thread_id = response.url.split("/")[-3]
@@ -111,12 +111,12 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         thread_url = response.url
         return thread_url.encode("utf-8")
 
-    def __parse_creation_date(self, response):
-        thread_creation_date_xpath = self.thread_head_xpath + '/div/@data-timestamp'
+    def __parse_created_date(self, response):
+        thread_created_date_xpath = self.thread_head_xpath + '/div/@data-timestamp'
 
         try:
-            thread_creation_date = int(response.xpath(thread_creation_date_xpath).extract()[0])
+            thread_created_date = int(response.xpath(thread_created_date_xpath).extract()[0])
         except IndexError:
-            thread_creation_date = -1
+            thread_created_date = -1
 
-        return thread_creation_date
+        return thread_created_date

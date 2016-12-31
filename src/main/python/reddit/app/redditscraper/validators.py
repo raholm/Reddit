@@ -23,7 +23,7 @@ class RedditHTMLThreadRecordValidator(object):
             self.__validate_body(record) and \
             self.__validate_domain(record) and \
             self.__validate_url(record) and \
-            self.__validate_creation_date(record)
+            self.__validate_created_date(record)
 
     def __validate_id(self, record):
         return record["id"] != ""
@@ -52,5 +52,5 @@ class RedditHTMLThreadRecordValidator(object):
     def __validate_url(self, record):
         return record["url"] != ""
 
-    def __validate_creation_date(self, record):
-        return record["creation_date"] != -1
+    def __validate_created_date(self, record):
+        return record["created_date"] != -1

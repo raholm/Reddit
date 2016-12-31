@@ -19,4 +19,4 @@ class RedditHTMLThreadRecord(RedditHTMLRecord):
         self.body = None
         self.domain = None
         self.url = None
-        self.creation_date = None
+        self.created_date = None

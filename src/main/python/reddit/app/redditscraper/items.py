@@ -21,4 +21,5 @@ class RedditThreadScraperItem(scrapy.Item):
     body = scrapy.Field()
     domain = scrapy.Field()
     url = scrapy.Field()
-    creation_date = scrapy.Field()
+    created_date = scrapy.Field()
+    received_date = scrapy.Field()
