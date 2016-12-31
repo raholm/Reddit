@@ -1,46 +1,18 @@
 package reddit.app;
 
-import java.io.IOException;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.codehaus.jettison.json.JSONException;
 
 public class FilterSubredditCommentRecordDriver
   extends Configured implements Tool {
-
-  public static class FilterSubredditCommentRecordMapper
-    extends Mapper<Object, Text, NullWritable, Text> {
-
-    private RedditCommentRecordParser parser = new RedditCommentRecordParser();
-
-    @Override
-    protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-      try {
-        if (parser.parse(value)) {
-          RedditCommentRecord record = parser.getRecord();
-          Configuration conf = context.getConfiguration();
-          String subreddit = conf.get("subreddit", "").toLowerCase();
-
-          if (!subreddit.equals("") &&
-              record.getSubreddit().toLowerCase().equals(subreddit)) {
-            context.write(NullWritable.get(), value);
-          }
-        }
-      } catch (JSONException e) {
-        // Do nothing
-      }
-    }
-  }
 
   @Override
   public int run(String[] args) throws Exception {
