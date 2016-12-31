@@ -6,11 +6,11 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from redditscraper.items import RedditThreadScraperItem
+from redditscraper.validators import RedditHTMLThreadRecordValidator
 
 class RedditThreadPrintItemPipeline(object):
     def process_item(self, item, spider):
-        # print(item)
-        # print(item["title"])
+        print(item)
         return item
 
 class RedditThreadValidateItemPipeline(object):
@@ -26,4 +26,7 @@ class RedditThreadValidateItemPipeline(object):
         return False
 
     def valid_thread_item(self, item):
-        return item["id"] != "" and item["title"] != ""
+        if not hasattr(self, "thread_validator"):
+            self.thread_validator = RedditHTMLThreadRecordValidator()
+
+        return self.thread_validator.validate(item)

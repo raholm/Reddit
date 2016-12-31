@@ -9,4 +9,12 @@ import scrapy
 
 class RedditThreadScraperItem(scrapy.Item):
     id = scrapy.Field()
+    author_id = scrapy.Field()
+    author = scrapy.Field()
+    subreddit_id = scrapy.Field()
+    subreddit = scrapy.Field()
     title = scrapy.Field()
+    body = scrapy.Field()
+    domain = scrapy.Field()
+    url = scrapy.Field()
+    creation_date = scrapy.Field()
