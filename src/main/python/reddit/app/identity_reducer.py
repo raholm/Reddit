@@ -15,7 +15,8 @@ from redditscraper.runners import RedditThreadSpiderRunner
 subreddit_thread_ids = defaultdict(list)
 
 for line in sys.stdin:
-    obj = json.loads(line)
+    record = line.split(";")[1]
+    obj = json.loads(record)
     try:
         subreddit_thread_ids[obj["subreddit"]].append(obj["threadId"][3:])
     except KeyError:

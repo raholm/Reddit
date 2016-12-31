@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+  <property>
+	<name>mapreduce.input.keyvaluelinerecordreader.key.value.separator</name>
+	<value>;</value>
+  </property>
+
+  <!-- <property> -->
+  <!--   <name>mapreduce.textoutputformat.separator</name> -->
+  <!--   <value>;</value> -->
+  <!-- </property> -->
+
+  <!-- <property> -->
+  <!--   <name>mapreduce.output.key.field.separator</name> -->
+  <!--   <value>;</value> -->
+  <!-- </property> -->
+
+  <property>
+    <name>mapreduce.output.textoutputformat.separator</name>
+    <value>;</value>
+  </property>
+
+  <property>
+    <name>mapred.textoutputformat.separatorText</name>
+    <value>;</value>
+  </property>
+</configuration>

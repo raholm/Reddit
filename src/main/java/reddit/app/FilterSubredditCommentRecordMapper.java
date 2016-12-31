@@ -3,13 +3,18 @@ package reddit.app;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.codehaus.jettison.json.JSONException;
 
 public class FilterSubredditCommentRecordMapper
-  extends Mapper<Object, Text, NullWritable, Text> {
+  extends Mapper<Object, Text, IntWritable, Text> {
+
+  private enum Counters {
+    Records
+  }
 
   private RedditCommentRecordParser parser = new RedditCommentRecordParser();
 
@@ -23,7 +28,9 @@ public class FilterSubredditCommentRecordMapper
 
         if (!subreddit.equals("") &&
             record.getSubreddit().toLowerCase().equals(subreddit)) {
-          context.write(NullWritable.get(), value);
+          Counter counter = context.getCounter(Counters.Records);
+          counter.increment(1);
+          context.write(new IntWritable((int) counter.getValue()), value);
         }
       }
     } catch (JSONException e) {
