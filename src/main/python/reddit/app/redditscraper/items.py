@@ -13,13 +13,13 @@ class RedditThreadScraperItem(scrapy.Item):
     """
 
     id = scrapy.Field()
-    author_id = scrapy.Field()
+    authorId = scrapy.Field()
     author = scrapy.Field()
-    subreddit_id = scrapy.Field()
+    subredditId = scrapy.Field()
     subreddit = scrapy.Field()
     title = scrapy.Field()
     body = scrapy.Field()
     domain = scrapy.Field()
     url = scrapy.Field()
-    created_date = scrapy.Field()
-    received_date = scrapy.Field()
+    createdDate = scrapy.Field()
+    retrievedDate = scrapy.Field()

@@ -48,15 +48,15 @@ class RedditThreadSpider(RedditSpider):
 
         item = RedditThreadScraperItem()
         item["id"] = record.id
-        item["author_id"] = record.author_id
+        item["authorId"] = record.author_id
         item["author"] = record.author
-        item["subreddit_id"] = record.subreddit_id
+        item["subredditId"] = record.subreddit_id
         item["subreddit"] = record.subreddit
         item["title"] = record.title
         item["body"] = record.body
         item["domain"] = record.domain
         item["url"] = record.url
-        item["created_date"] = record.created_date
-        item["received_date"] = get_utc_timestamp()
+        item["createdDate"] = record.created_date
+        item["retrievedDate"] = get_utc_timestamp()
 
         return item
