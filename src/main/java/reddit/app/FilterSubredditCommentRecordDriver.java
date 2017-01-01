@@ -29,6 +29,7 @@ public class FilterSubredditCommentRecordDriver
     conf.addResource("conf/reddit.xml");
     conf.addResource("conf/hadoop.xml");
 
+    // Compression Settings
     conf.set("mapreduce.output.fileoutputformat.compress", "true");
     conf.set("mapreduce.output.fileoutputformat.compress.type", "BLOCK");
     conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.GzipCodec");
