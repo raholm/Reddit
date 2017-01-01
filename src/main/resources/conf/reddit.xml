@@ -3,7 +3,7 @@
 <configuration>
   <property>
 	<name>subreddit</name>
-	<value>reddit.com</value>
+	<value>askreddit</value>
   </property>
 
   <property>

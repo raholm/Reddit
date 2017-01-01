@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
+
+  <!-- File Format Settings -->
   <property>
 	<name>mapreduce.input.keyvaluelinerecordreader.key.value.separator</name>
 	<value>;</value>
+  </property>
+
+  <property>
+    <name>mapreduce.output.textoutputformat.separator</name>
+    <value>;</value>
+  </property>
+
+  <property>
+    <name>mapred.textoutputformat.separatorText</name>
+    <value>;</value>
   </property>
 
   <!-- <property> -->
@@ -16,13 +28,29 @@
   <!--   <value>;</value> -->
   <!-- </property> -->
 
+  <!-- Compression Settings -->
   <property>
-    <name>mapreduce.output.textoutputformat.separator</name>
-    <value>;</value>
+	<name>mapreduce.map.output.compress</name>
+	<value>true</value>
   </property>
 
   <property>
-    <name>mapred.textoutputformat.separatorText</name>
-    <value>;</value>
+	<name>mapreduce.map.output.compress.codec</name>
+	<value>org.apache.hadoop.io.compress.GzipCodec</value>
+  </property>
+
+  <property>
+	<name>mapreduce.output.fileoutputformat.compress</name>
+	<value>true</value>
+  </property>
+
+  <property>
+	<name>mapreduce.output.fileoutputformat.compress.type</name>
+	<value>BLOCK</value>
+  </property>
+
+  <property>
+	<name>mapreduce.output.fileoutputformat.compress.codec</name>
+	<value>org.apache.hadoop.io.compress.GzipCodec</value>
   </property>
 </configuration>

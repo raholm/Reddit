@@ -32,6 +32,8 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         self.record.url = self.__parse_url(response)
         self.record.created_date = self.__parse_created_date(response)
 
+        self.record.adjust_for_deleted_fields()
+
     def __parse_id(self, response):
         thread_id = response.url.split("/")[-3]
         return thread_id
@@ -73,6 +75,13 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
             thread_author = response.xpath(thread_author_xpath).extract()[0]
         except IndexError:
             thread_author = ""
+
+        if thread_author == "":
+            try:
+                thread_author_xpath = self.thread_head_xpath + '//span[@class="author"]/text()'
+                thread_author = response.xpath(thread_author_xpath).extract()[0]
+            except IndexError:
+                thread_author = ""
 
         return thread_author
 
