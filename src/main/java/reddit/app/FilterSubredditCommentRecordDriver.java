@@ -29,6 +29,10 @@ public class FilterSubredditCommentRecordDriver
     conf.addResource("conf/reddit.xml");
     conf.addResource("conf/hadoop.xml");
 
+    conf.set("mapreduce.output.fileoutputformat.compress", "true");
+    conf.set("mapreduce.output.fileoutputformat.compress.type", "BLOCK");
+    conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.GzipCodec");
+
     Job job = Job.getInstance(conf, "Filter Subreddit Comments");
     job.setJarByClass(FilterSubredditCommentRecordDriver.class);
     job.setMapperClass(FilterSubredditCommentRecordMapper.class);
