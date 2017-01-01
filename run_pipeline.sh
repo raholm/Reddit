@@ -2,20 +2,32 @@
 
 TOTAL_START_TIME=$(date +%s)
 
-mvn clean package
+preprocess () {
+    rm -f ./reddit-1.0-SNAPSHOT.jar ./redditscraper.zip ./reddit_thread_scraper_mapper.py
+    cd ./src/main/python/reddit/app/
+    rm -f redditscraper.zip
+    zip -r redditscraper.zip redditscraper/
+    cd ../../../../../
+    mvn clean package
+}
+
+preprocess
 
 HADOOP_CONFIG=./conf/hadoop/hadoop-local.xml
 
-FILTER_SUBREDDIT_INPUT=input/
-FILTER_SUBREDDIT_OUTPUT=output/subreddit/
+# Filter Subreddit MapReduce Task Settings
+FILTER_SUBREDDIT_INPUT=input
+FILTER_SUBREDDIT_OUTPUT=output/subreddit
 FILTER_SUBREDDIT_DRIVER=reddit.app.FilterSubredditCommentRecordDriver
 
+# Filter Fields MapReduce Task Settings
 FILTER_FIELDS_INPUT=$FILTER_SUBREDDIT_OUTPUT
-FILTER_FIELDS_OUTPUT=output/fields/
+FILTER_FIELDS_OUTPUT=output/fields
 FILTER_FIELDS_DRIVER=reddit.app.FilterAndFormatRedditCommentRecordFieldsDriver
 
+# Streaming MapReduce Task Settings
 STREAMING_INPUT=$FILTER_FIELDS_OUTPUT
-STREAMING_OUTPUT=output/streaming/
+STREAMING_OUTPUT=output/streaming
 STREAMING_JARS=target/reddit-1.0-SNAPSHOT.jar
 STREAMING_FILES="./src/main/python/reddit/app/reddit_thread_scraper_mapper.py,./src/main/python/reddit/app/redditscraper.zip"
 STREAMING_MAPPER=reddit_thread_scraper_mapper.py
@@ -54,10 +66,10 @@ hadoop jar $HADOOP_PATH/share/hadoop/tools/lib/hadoop-streaming-2.7.3.jar \
 FILTER_STREAMING_END_TIME=$(date +%s)
 FILTER_STREAMING_DIFF_TIME=$((FILTER_STREAMING_END_TIME - FILTER_STREAMING_START_TIME))
 
-echo "Output:"
+# echo "Output:"
 # cat $FILTER_SUBREDDIT_OUTPUT/part-*
 # cat $FILTER_FIELDS_OUTPUT/part-*
-cat $STREAMING_OUTPUT/part-*
+# cat $STREAMING_OUTPUT/part-*
 
 TOTAL_END_TIME=$(date +%s)
 TOTAL_DIFF_TIME=$(($TOTAL_END_TIME - $TOTAL_START_TIME))
