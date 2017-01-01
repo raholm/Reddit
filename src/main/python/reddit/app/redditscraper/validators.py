@@ -29,13 +29,13 @@ class RedditHTMLThreadRecordValidator(object):
         return record["id"] != ""
 
     def __validate_author_id(self, record):
-        return record["author_id"] != ""
+        return record["authorId"] != ""
 
     def __validate_author(self, record):
         return record["author"] != ""
 
     def __validate_subreddit_id(self, record):
-        return record["subreddit_id"] != ""
+        return record["subredditId"] != ""
 
     def __validate_subreddit(self, record):
         return record["subreddit"] != ""
@@ -53,4 +53,4 @@ class RedditHTMLThreadRecordValidator(object):
         return record["url"] != ""
 
     def __validate_created_date(self, record):
-        return record["created_date"] != -1
+        return record["createdDate"] != -1

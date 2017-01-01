@@ -34,7 +34,7 @@ class RedditThreadSpider(RedditSpider):
         base_url = "https://www.reddit.com/r/"
 
         for subreddit in self.subreddit_thread_ids:
-            for thread_id in self.subreddit_thread_ids[subreddit]:
+            for thread_id in set(self.subreddit_thread_ids[subreddit]):
                 url = base_url + subreddit + "/comments/" + thread_id
                 yield scrapy.Request(url, callback=self.parse)
 

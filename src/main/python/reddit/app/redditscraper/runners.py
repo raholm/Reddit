@@ -26,7 +26,7 @@ class RedditThreadSpiderRunner(object):
         self.subreddit_thread_ids = subreddit_thread_ids
 
     def run(self):
-        configure_logging({"LOG_LEVEL": "ERROR"})
+        configure_logging({"LOG_LEVEL": "WARN"})
         runner = CrawlerRunner()
         d = runner.crawl(RedditThreadSpider, **{"subreddit_thread_ids": self.subreddit_thread_ids})
         d.addBoth(lambda _: reactor.stop())

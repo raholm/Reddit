@@ -34,7 +34,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
 
     def __parse_id(self, response):
         thread_id = response.url.split("/")[-3]
-        return thread_id.encode("utf-8")
+        return thread_id
 
     def __parse_subreddit_id(self, response):
         thread_subreddit_id_xpath = self.thread_head_xpath + '/div/@data-subreddit-fullname'
@@ -44,7 +44,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_subreddit_id = ""
 
-        return thread_subreddit_id.encode("utf-8")
+        return thread_subreddit_id
 
     def __parse_subreddit(self, response):
         thread_subreddit_xpath = self.thread_head_xpath + '/div/@data-subreddit'
@@ -54,7 +54,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_subreddit = ""
 
-        return thread_subreddit.encode("utf-8")
+        return thread_subreddit
 
     def __parse_author_id(self, response):
         thread_author_id_xpath = self.thread_head_xpath + '/div/@data-author-fullname'
@@ -64,7 +64,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_author_id = ""
 
-        return thread_author_id.encode("utf-8")
+        return thread_author_id
 
     def __parse_author(self, response):
         thread_author_xpath = self.thread_head_xpath + '/div/@data-author'
@@ -74,7 +74,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_author = ""
 
-        return thread_author.encode("utf-8")
+        return thread_author
 
     def __parse_title(self, response):
         thread_title_xpath = '//p[@class="title"]/a/text()'
@@ -84,7 +84,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_title = ""
 
-        return thread_title.encode("utf-8")
+        return thread_title
 
     def __parse_body(self, response):
         thread_body_xpath = self.thread_head_xpath + '//div[contains(@class, "usertext-body")]/div//text()'
@@ -95,7 +95,7 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_body = ""
 
-        return thread_body.encode("utf-8")
+        return thread_body
 
     def __parse_domain(self, response):
         thread_domain_xpath = self.thread_head_xpath + '/div/@data-domain'
@@ -105,11 +105,11 @@ class RedditHTMLThreadRecordParser(RedditHTMLRecordParser):
         except IndexError:
             thread_domain = ""
 
-        return thread_domain.encode("utf-8")
+        return thread_domain
 
     def __parse_url(self, response):
         thread_url = response.url
-        return thread_url.encode("utf-8")
+        return thread_url
 
     def __parse_created_date(self, response):
         thread_created_date_xpath = self.thread_head_xpath + '/div/@data-timestamp'

@@ -4,13 +4,22 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+from scrapy.exceptions import DropItem
 
 from redditscraper.items import RedditThreadScraperItem
 from redditscraper.validators import RedditHTMLThreadRecordValidator
+from redditscraper.exporters import JsonItemExporter
 
 class RedditThreadPrintItemPipeline(object):
+    def open_spider(self, spider):
+        self.exporter = JsonItemExporter()
+        self.exporter.start_exporting()
+
+    def close_spider(self, spider):
+        self.exporter.finish_exporting()
+
     def process_item(self, item, spider):
-        print(item)
+        self.exporter.export_item(item)
         return item
 
 class RedditThreadValidateItemPipeline(object):
