@@ -13,6 +13,14 @@ class JsonItemExporter(JsonLinesItemExporter):
     def finish_exporting(self):
         pass
 
-    def export_item(self, item):
+    def export_item(self, item, prefix=None, postfix=None):
         itemdict = dict(self._get_serialized_fields(item))
-        print(self.encoder.encode(itemdict))
+        string = self.encoder.encode(itemdict)
+
+        if prefix is not None:
+            string = prefix + string
+
+        if postfix is not None:
+            string = string + postfix
+
+        print(string)

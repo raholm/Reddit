@@ -22,7 +22,7 @@ class RedditThreadSpider(RedditSpider):
     custom_settings = {
         'ITEM_PIPELINES': {
             'redditscraper.pipelines.RedditThreadValidateItemPipeline': 100,
-            'redditscraper.pipelines.RedditThreadPrintItemPipeline': 300,
+            'redditscraper.pipelines.RedditThreadOutputPipeline': 300,
         }
     }
 
