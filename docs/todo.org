@@ -1,0 +1,12 @@
+* Setup Script for Cluster Nodes
+** Java 8
+** Hadoop 2.7.3
+*** Hadoop
+*** Mapreduce
+*** HDFS
+*** Yarn
+** HBase 1.2.4
+* Create HBase database
+** Table for threads
+** Table for users
+** Table for comments

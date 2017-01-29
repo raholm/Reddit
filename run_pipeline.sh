@@ -4,7 +4,7 @@
 HADOOP_CONFIG=./conf/hadoop/hadoop-local.xml
 
 # Filter Subreddit MapReduce Task Settings
-FILTER_SUBREDDIT_INPUT=input
+FILTER_SUBREDDIT_INPUT=input/2008
 FILTER_SUBREDDIT_OUTPUT=output/subreddit
 FILTER_SUBREDDIT_DRIVER=reddit.app.FilterSubredditCommentRecordDriver
 

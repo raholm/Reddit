@@ -1,0 +1,6 @@
+* Binaries
+/usr/local/bin
+* Configuration
+/usr/local/conf
+* Data
+/usr/local/data
