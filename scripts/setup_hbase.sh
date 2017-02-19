@@ -39,7 +39,7 @@ download() {
 }
 
 setup() {
-    desination="/user/local/bin"
+    destination="/usr/local/bin"
 
     if [ -d "$destination/hbase" ]; then
         mv "$destination/hbase" "$destination/hbase_scpt"

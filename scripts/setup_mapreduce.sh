@@ -1,6 +1,6 @@
 #!/bin/sh
 
-conf_dir=/usr/local/bin/mapred
+conf_dir=/usr/local/bin/conf/mapred
 
 install() {
     create_directories

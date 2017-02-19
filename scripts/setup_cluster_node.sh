@@ -1,5 +1,9 @@
 #!/bin/sh
 
+setup_directories() {
+    mkdir -p /usr/local/bin /usr/local/data /usr/local/conf
+}
+
 install_prerequisite() {
     apt-get update
     apt-get upgrade -y
@@ -17,4 +21,6 @@ install_hadoop_ecosystem() {
     bash ./setup_hbase.sh
 }
 
+setup_directories
+install_prerequisite
 install_hadoop_ecosystem
