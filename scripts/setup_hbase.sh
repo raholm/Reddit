@@ -69,7 +69,7 @@ export HBASE_DATA=$data_dir
 export HBASE_CONF=$conf_dir
 export HBASE_VERSION=$version
 
-export PATH=\$PATH:\$HBASE_PATH/bin
+export PATH=\$PATH:\$HBASE_HOME/bin
 # HBase <----
 EOF
         source ~/.bashrc
