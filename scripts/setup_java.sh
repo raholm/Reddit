@@ -20,10 +20,15 @@ install() {
 
 set_environmental_variables() {
     if [ -z "`cat ~/.bashrc | grep "Java"`" ]; then
+        java="`which java`"
+        chrlen=${#java_home}
+        # Remove /bin/java
+        java_home=${java:0:(chrlen - 9)}
+
         cat <<EOF >> ~/.bashrc
 # ----> Java
-export JAVA_HOME="`which java`"
-export PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME=$java_home
+export PATH=\$JAVA_HOME/bin:$PATH
 # Java <----
 EOF
         source ~/.bashrc
