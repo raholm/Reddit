@@ -23,6 +23,7 @@ set_environmental_variables() {
         cat <<EOF >> ~/.bashrc
 # ----> Java
 export JAVA_HOME="`which java`"
+export PATH=$JAVA_HOME/bin:$PATH
 # Java <----
 EOF
         source ~/.bashrc
