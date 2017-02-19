@@ -12,7 +12,7 @@ create_directories() {
 }
 
 environmental_variables() {
-    if [ -z "`cat ~/.bashrc | grep "Zookeeper"`"]; then
+    if [ -z "`cat ~/.bashrc | grep "Zookeeper"`" ]; then
         cat <<EOF >> ~/.bashrc
 # ----> Zookeeper
 export ZOOKEEPER_DATA_PATH=$data_dir
