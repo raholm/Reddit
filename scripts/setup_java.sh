@@ -19,7 +19,7 @@ install() {
 }
 
 set_environmental_variables() {
-    if [ -z "`cat ~/.bashrc | grep "Java"`"]; then
+    if [ -z "`cat ~/.bashrc | grep "Java"`" ]; then
         cat <<EOF >> ~/.bashrc
 # ----> Java
 export JAVA_HOME="`which java`"

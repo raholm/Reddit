@@ -42,7 +42,7 @@ download() {
 setup() {
     desination="/user/local/bin"
 
-    if [ -d "$destination/hbase"]; then
+    if [ -d "$destination/hbase" ]; then
         mv "$destination/hbase" "$destination/hbase_scpt"
     fi
 
@@ -62,7 +62,7 @@ create_directories() {
 }
 
 set_environmental_variables() {
-    if [ -z "`cat ~/.bashrc | grep "HBase"`"]; then
+    if [ -z "`cat ~/.bashrc | grep "HBase"`" ]; then
         cat <<EOF >> ~/.bashrc
 # ----> HBase
 export HBASE_HOME=$home_dir

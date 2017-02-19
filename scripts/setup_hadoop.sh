@@ -41,7 +41,7 @@ download() {
 setup() {
     destination="/usr/local/bin"
 
-    if [ -d "$destination/hadoop"]; then
+    if [ -d "$destination/hadoop" ]; then
         mv "$destination/hadoop" "$destination/hadoop_scpt"
     fi
 
@@ -61,7 +61,7 @@ create_directories() {
 }
 
 set_environmental_variables() {
-    if [ -z "`cat ~/.bashrc | grep "Hadoop"`"]; then
+    if [ -z "`cat ~/.bashrc | grep "Hadoop"`" ]; then
         cat <<EOF >> ~/.bashrc
 # ----> Hadoop
 export HADOOP_HOME=$home_dir
