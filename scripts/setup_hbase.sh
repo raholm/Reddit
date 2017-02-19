@@ -7,6 +7,7 @@ data_dir=/usr/local/data/hbase
 conf_dir=/usr/local/conf/hbase
 
 install() {
+    download
     if [ -z "`hbase version 2>&1 | grep $version`" ]; then
         echo "Incorrect HBase version found."
         echo "Installing HBase..."
@@ -19,7 +20,7 @@ install() {
 }
 
 download() {
-    tarfile="hbase-$version.tar.gz"
+    tarfile="hbase-$version-bin.tar.gz"
     download_link="https://www-eu.apache.org/dist/hbase/$version/$tarfile"
 
     if [ ! -f "$tarfile" ]; then
@@ -72,6 +73,7 @@ export HBASE_VERSION=$version
 export PATH=\$PATH:\$HBASE_PATH/bin
 # HBase <----
 EOF
+        source ~/.bashrc
     fi
 }
 

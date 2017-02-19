@@ -77,6 +77,7 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=\$HADOOP_HOME/lib/native
 export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin
 # Hadoop <----
 EOF
+        source ~/.bashrc
     fi
 }
 

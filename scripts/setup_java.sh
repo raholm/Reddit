@@ -14,6 +14,19 @@ install() {
     else
         echo "Java already installed."
     fi
+
+    set_environmental_variables
+}
+
+set_environmental_variables() {
+    if [ -z "`cat ~/.bashrc | grep "Java"`"]; then
+        cat <<EOF >> ~/.bashrc
+# ----> Java
+export JAVA_HOME="`which java`"
+# Java <----
+EOF
+        source ~/.bashrc
+    fi
 }
 
 install
