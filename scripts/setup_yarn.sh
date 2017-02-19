@@ -3,15 +3,20 @@
 data_dir=/usr/local/data/yarn
 conf_dir=/usr/local/conf/yarn
 
-directories() {
+install() {
+    create_directories
+    setup_configuration
+}
+
+create_directories() {
     mkdir -p $data_dir $conf_dir
 }
 
-configuration() {
-
+setup_configuration() {
+    setup_localhost_configuration
 }
 
-localhost_configuration() {
+setup_localhost_configuration() {
     cat <<EOF # > $conf_dir/yarn-local.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
@@ -26,3 +31,5 @@ localhost_configuration() {
 </configuration>
 EOF
 }
+
+install

@@ -15,3 +15,5 @@ install() {
         echo "Java already installed."
     fi
 }
+
+install

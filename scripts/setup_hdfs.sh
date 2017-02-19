@@ -3,12 +3,21 @@
 data_dir=/usr/local/data/hdfs
 conf_dir=/usr/local/conf/hdfs
 
-configuration() {
-
+install() {
+    create_directories
+    setup_configuration
 }
 
-local_configuration() {
-    cat <<EOF # > $conf_dir/hdfs-local.xml
+create_directories() {
+    mkdir -p $data_dir $conf_dir
+}
+
+setup_configuration() {
+    setup_local_configuration
+}
+
+setup_local_configuration() {
+    cat <<EOF > $conf_dir/hdfs-local.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property>
@@ -26,3 +35,5 @@ local_configuration() {
 </configuration>
 EOF
 }
+
+install

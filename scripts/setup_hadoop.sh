@@ -1,20 +1,17 @@
 #!/bin/sh
 
-version="2.7.2"
+version=2.7.2
 
-home_dir="/usr/local/bin/hadoop"
-data_dir="/usr/local/data/hadoop"
-conf_dir="/usr/local/conf/hadoop"
+home_dir=/usr/local/bin/hadoop
+data_dir=/usr/local/data/hadoop
+conf_dir=/usr/local/conf/hadoop
 
 install() {
-
     if [ -z "`hadoop version 2>&1 | grep $version`" ]; then
         echo "Incorrect Hadoop version found."
         echo "Installing Hadoop..."
-
         download
         setup
-
         echo "Installation complete"
     else
         echo "Hadoop already installed."
@@ -44,24 +41,28 @@ download() {
 setup() {
     destination="/usr/local/bin"
 
-    # if [ -d "$destination/hadoop"]; then
-    #     mv "$destination/hadoop" "$destination/hadoop_scpt"
-    # fi
+    if [ -d "$destination/hadoop"]; then
+        mv "$destination/hadoop" "$destination/hadoop_scpt"
+    fi
 
     if [ -d "hadoop" ]; then
         echo "Hadoop directory exists."
-        # mv "hadoop" "$destination"
+        mv "hadoop" "$destination"
+        create_directories
+        set_environmental_variables
+        setup_configuration
     else
         echo "Hadoop directory does not exists."
     fi
 }
 
-directories() {
+create_directories() {
     mkdir -p $data_dir $conf_dir
 }
 
-environmental_variables() {
-    cat <<EOF # >> ~/.bashrc
+set_environmental_variables() {
+    if [ -z "`cat ~/.bashrc | grep "Hadoop"`"]; then
+        cat <<EOF >> ~/.bashrc
 # ----> Hadoop
 export HADOOP_HOME=$home_dir
 export HADOOP_INSTALL=\$HADOOP_HOME
@@ -76,16 +77,17 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=\$HADOOP_HOME/lib/native
 export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin
 # Hadoop <----
 EOF
+    fi
 }
 
-configuration() {
-    local_configuration
-    localhost_configuration
-    cluster_configuration
+setup_configuration() {
+    setup_local_configuration
+    setup_localhost_configuration
+    setup_cluster_configuration
 }
 
-local_configuration() {
-    cat <<EOF # > $conf_dir/hadoop-local.xml
+setup_local_configuration() {
+    cat <<EOF > $conf_dir/hadoop-local.xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
@@ -107,8 +109,8 @@ local_configuration() {
 EOF
 }
 
-localhost_configuration() {
-    cat <<EOF # > $conf_dir/hadoop-localhost.xml
+setup_localhost_configuration() {
+    cat <<EOF > $conf_dir/hadoop-localhost.xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
@@ -135,8 +137,8 @@ localhost_configuration() {
 EOF
 }
 
-cluster_configuration() {
-    cat <<EOF # > $conf_dir/hadoop-cluster.xml
+setup_cluster_configuration() {
+    cat <<EOF > $conf_dir/hadoop-cluster.xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
@@ -158,4 +160,4 @@ cluster_configuration() {
 EOF
 }
 
-# install
+install
