@@ -95,3 +95,5 @@ setup_local_configuration() {
 </configuration>
 EOF
 }
+
+install

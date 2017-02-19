@@ -17,7 +17,7 @@ setup_configuration() {
 }
 
 setup_localhost_configuration() {
-    cat <<EOF # > $conf_dir/yarn-local.xml
+    cat <<EOF > $conf_dir/yarn-local.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property>
