@@ -1,0 +1,73 @@
+* Resolving Hostnames
+https://bbs.archlinux.org/viewtopic.php?id=92556
+http://stackoverflow.com/questions/23325451/debian-command-line-cannot-resolve-host
+https://ubuntuforums.org/showthread.php?t=1772387
+** Server Side
+1. Open Hosts
+#+BEGIN_SRC bash
+sudo emacs /etc/hosts
+#+END_SRC
+2. Append to file
+#+BEGIN_SRC bash
+192.168.0.15 pi1
+192.168.0.16 pi2
+192.168.0.18 pi3
+#+END_SRC
+** Client Side
+1. Open Hosts
+#+BEGIN_SRC bash
+sudo emacs /etc/hosts
+#+END_SRC
+2. Append to file
+#+BEGIN_SRC bash
+192.168.0.11 server
+#+END_SRC
+* Autofs
+https://help.ubuntu.com/community/Autofs
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-16-04
+** Server Side
+*** Software
+#+BEGIN_SRC bash
+sudo apt-get install autofs nfs-kernel-server nfs-common
+#+END_SRC
+*** Setup Exports
+**** Create Directory and setup security
+#+BEGIN_SRC bash
+mkdir -p /home/bigdata/shared
+sudo chown nobody:nogroup /home/bigdata/shared
+#+END_SRC
+**** Export Directory
+#+BEGIN_SRC bash
+sudo emacs -nw /etc/exports
+/home/bigdata/shared 192.168.0.0/255.255.255.0(rw,sync,no_subtree_check)
+sudo service nfs-kernel-server restart
+#+END_SRC
+** Client Side
+*** Software
+#+BEGIN_SRC bash
+sudo apt-get install autofs
+#+END_SRC
+*** Creating Mount Point
+1. Open master file
+#+BEGIN_SRC bash
+sudo emacs /etc/auto.master
+#+END_SRC
+2. Append to file
+#+BEGIN_SRC bash
+/nfs /etc/auto.nfs
+#+END_SRC
+3. Create map file
+#+BEGIN_SRC bash
+sudo emacs /etc/auto.nfs
+#+END_SRC
+4. Append to file
+#+BEGIN_SRC bash
+server server:/home/bigdata/shared
+#+END_SRC
+* SSH keys
+http://blog.ittoby.com/2013/08/starting-small-set-up-hadoop-compute.html
+* Commands
+- nslookup ip
+- addgroup hadoop
+- adduser --ingroup hadoop hduser
+- chown -R hduser:hadoop hadoop

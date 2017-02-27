@@ -1,11 +1,18 @@
 * Setup Script for Cluster Nodes
+** Mount Home Directory
 ** Java 8
 ** Hadoop 2.7.3
 *** Hadoop
+1. Hadoop User and Group (sudo chown -R hadoop:hadoop hadoop)
 *** Mapreduce
+1. MapReduce User
 *** HDFS
+1. Setup ssh keys
 *** Yarn
+1. Yarn User
+2. Setup ssh keys
 ** HBase 1.2.4
+1. HBase User
 * Create HBase database
 ** Table for threads
 ** Table for users
