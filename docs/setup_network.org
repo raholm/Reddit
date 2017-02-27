@@ -1,6 +1,8 @@
+#+LATEX_HEADER: \usepackage{hyperref}
+
 * Resolving Hostnames
-https://bbs.archlinux.org/viewtopic.php?id=92556
-http://stackoverflow.com/questions/23325451/debian-command-line-cannot-resolve-host
+https://bbs.archlinux.org/viewtopic.php?id=92556 \newline
+http://stackoverflow.com/questions/23325451/debian-command-line-cannot-resolve-host \newline
 https://ubuntuforums.org/showthread.php?t=1772387
 ** Server Side
 1. Open Hosts
@@ -23,7 +25,7 @@ sudo emacs /etc/hosts
 192.168.0.11 server
 #+END_SRC
 * Autofs
-https://help.ubuntu.com/community/Autofs
+https://help.ubuntu.com/community/Autofs \newline
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-16-04
 ** Server Side
 *** Software
